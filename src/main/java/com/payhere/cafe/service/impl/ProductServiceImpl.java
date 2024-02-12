@@ -38,6 +38,7 @@ public class ProductServiceImpl implements ProductService {
     private final JwtTokenUtil jwtTokenUtil;
     private final Logger logger = LogManager.getLogger(this.getClass());
     private static final int PAGE_SIZE = 10;
+    private static final String[] CHO = {"ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"};
 
     @Override
     @Transactional
@@ -50,6 +51,7 @@ public class ProductServiceImpl implements ProductService {
             }
 
             Product product = productMapper.convertToEntity(productDTO);
+            product.setChoseongName(this.convertToInitialSound(product.getName()));
             UserIdProjection userIdProjection = userRepository.findUserIdProjectionByPhoneNumber(phoneNumber);
             product.setUserId(userIdProjection.getId());
             Product resultProduct = productRepository.save(product);
@@ -61,6 +63,21 @@ public class ProductServiceImpl implements ProductService {
             logger.error("데이터베이스 연결 예외 발생: " + ex.getMessage());
             throw new DBConnectionException("데이터베이스 연결 예외 발생", ex);
         }
+    }
+
+    private static String convertToInitialSound(String name) {
+        StringBuilder result = new StringBuilder();
+
+        for (char character : name.toCharArray()) {
+            if (Character.getType(character) == Character.OTHER_LETTER) {
+                char initialSound = (char) ((character - 0xAC00) / 28 / 21);
+                result.append(CHO[(int) initialSound]);
+            } else {
+                result.append(character);
+            }
+        }
+
+        return result.toString();
     }
 
     public String jwtToUserPhoneNumber(HttpServletRequest request) {
@@ -159,6 +176,46 @@ public class ProductServiceImpl implements ProductService {
             logger.error("데이터베이스 연결 예외 발생: " + ex.getMessage());
             throw new DBConnectionException("데이터베이스 연결 예외 발생", ex);
         }
+    }
+
+    @Override
+    public List<ProductDTO> searchProduct(String name, HttpServletRequest request) {
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        try {
+            this.jwtToUserPhoneNumber(request);
+            if (!isConsonant(name)) {
+                List<Product> productList = productRepository.findByNameLike(name);
+                for (Product resultProduct : productList) {
+                    ProductDTO resultProductDTO = productMapper.convertToDTO(resultProduct);
+                    productDTOList.add(resultProductDTO);
+                }
+                return productDTOList;
+            } else {
+                List<Product> productList = productRepository.findByChoseongNameLike(name);
+                for (Product resultProduct : productList) {
+                    ProductDTO resultProductDTO = productMapper.convertToDTO(resultProduct);
+                    productDTOList.add(resultProductDTO);
+                }
+                return productDTOList;
+            }
+        } catch (DataAccessException ex) {
+            logger.error("데이터베이스 연결 예외 발생: " + ex.getMessage());
+            throw new DBConnectionException("데이터베이스 연결 예외 발생", ex);
+        }
+    }
+
+    private static boolean isConsonant(String name) {
+        char[] arr = name.toCharArray();
+        for (int i = 0; i < arr.length; i++) {
+            Boolean exist = false;
+            for (int j = 0; j < CHO.length; j++) {
+                if (CHO[j].charAt(0) == arr[i])
+                    exist = true;
+            }
+            if (exist == false)
+                return false;
+        }
+        return true;
     }
 
 }

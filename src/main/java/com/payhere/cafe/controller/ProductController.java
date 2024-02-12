@@ -56,4 +56,13 @@ public class ProductController {
                 productService.selectProduct(page, request));
         return ResponseEntity.ok(successResponse);
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<CommonResponse<List<ProductDTO>>> searchProduct(@RequestBody ProductDTO productDTO,
+                                                                          HttpServletRequest request) {
+        logger.debug("상품을 수정합니다.");
+        CommonResponse<List<ProductDTO>> successResponse = new CommonResponse<>(CommonResponse.Meta.builder().code(200).message("ok").build(),
+                productService.searchProduct(productDTO.getName(), request));
+        return ResponseEntity.ok(successResponse);
+    }
 }

@@ -13,4 +13,6 @@ public interface ProductService {
     String deleteProduct(Long productId, HttpServletRequest request);
 
     List<ProductDTO> selectProduct(int page, HttpServletRequest request);
+
+    List<ProductDTO> searchProduct(String name, HttpServletRequest request);
 }

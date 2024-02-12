@@ -34,6 +34,9 @@ public class Product {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "choseong_name")
+    private String choseongName;
+
     @Column(name = "description")
     private String description;
 
