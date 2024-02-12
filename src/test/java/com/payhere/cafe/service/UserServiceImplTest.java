@@ -4,6 +4,7 @@ import com.payhere.cafe.dto.UserDTO;
 import com.payhere.cafe.model.User;
 import com.payhere.cafe.modelmapper.UserModelMapper;
 import com.payhere.cafe.repository.UserRepository;
+import com.payhere.cafe.service.impl.UserServiceImpl;
 import com.payhere.cafe.util.JwtTokenUtil;
 import com.payhere.cafe.util.Sha256Encrypt;
 import jakarta.servlet.http.HttpServletRequest;

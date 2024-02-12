@@ -8,6 +8,7 @@ import com.payhere.cafe.projection.UserIdProjection;
 import com.payhere.cafe.repository.CategoryRepository;
 import com.payhere.cafe.repository.ProductRepository;
 import com.payhere.cafe.repository.UserRepository;
+import com.payhere.cafe.service.impl.ProductServiceImpl;
 import com.payhere.cafe.util.JwtTokenUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.BeforeEach;

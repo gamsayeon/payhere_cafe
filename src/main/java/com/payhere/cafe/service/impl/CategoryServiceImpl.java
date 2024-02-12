@@ -1,8 +1,9 @@
-package com.payhere.cafe.service;
+package com.payhere.cafe.service.impl;
 
 import com.payhere.cafe.exception.CafeServerException;
 import com.payhere.cafe.exception.NotMatchedJWTPatternException;
 import com.payhere.cafe.repository.CategoryRepository;
+import com.payhere.cafe.service.CategoryService;
 import com.payhere.cafe.util.JwtTokenUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;

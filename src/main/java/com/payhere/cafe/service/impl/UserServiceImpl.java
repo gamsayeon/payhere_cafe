@@ -1,4 +1,4 @@
-package com.payhere.cafe.service;
+package com.payhere.cafe.service.impl;
 
 import com.payhere.cafe.dto.UserDTO;
 import com.payhere.cafe.exception.CafeServerException;
@@ -8,6 +8,7 @@ import com.payhere.cafe.exception.NotMatchedUsersException;
 import com.payhere.cafe.model.User;
 import com.payhere.cafe.modelmapper.UserModelMapper;
 import com.payhere.cafe.repository.UserRepository;
+import com.payhere.cafe.service.UserService;
 import com.payhere.cafe.util.JwtTokenUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;

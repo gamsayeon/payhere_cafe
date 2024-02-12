@@ -1,4 +1,4 @@
-package com.payhere.cafe.service;
+package com.payhere.cafe.service.impl;
 
 import com.payhere.cafe.dto.ProductDTO;
 import com.payhere.cafe.exception.CafeServerException;
@@ -12,6 +12,7 @@ import com.payhere.cafe.projection.UserIdProjection;
 import com.payhere.cafe.repository.CategoryRepository;
 import com.payhere.cafe.repository.ProductRepository;
 import com.payhere.cafe.repository.UserRepository;
+import com.payhere.cafe.service.ProductService;
 import com.payhere.cafe.util.JwtTokenUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;

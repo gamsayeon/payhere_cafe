@@ -1,6 +1,7 @@
 package com.payhere.cafe.service;
 
 import com.payhere.cafe.repository.CategoryRepository;
+import com.payhere.cafe.service.impl.CategoryServiceImpl;
 import com.payhere.cafe.util.JwtTokenUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
