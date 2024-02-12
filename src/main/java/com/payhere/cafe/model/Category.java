@@ -6,15 +6,15 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-@Entity(name = "category")
-@Table(name = "category")
+@Entity(name = "categories")
+@Table(name = "categories")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id")
-    private Long categoryId;
+    @Column(name = "categories_id")
+    private Long categoriesId;
 
     @Column(name = "name")
     private String name;
