@@ -3,7 +3,7 @@ package com.payhere.cafe.controller;
 
 import com.payhere.cafe.dto.UserDTO;
 import com.payhere.cafe.model.CommonResponse;
-import com.payhere.cafe.service.impl.UserServiceImpl;
+import com.payhere.cafe.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @Log4j2
 @RequiredArgsConstructor
 public class UserController {
-    private final UserServiceImpl userService;
+    private final UserService userService;
     private final Logger logger = LogManager.getLogger(this.getClass());
 
     @PostMapping
@@ -39,7 +39,7 @@ public class UserController {
 
     @GetMapping("/logout")
     public ResponseEntity<CommonResponse<String>> logout(HttpServletRequest request) {
-        logger.debug("로그인합니다.");
+        logger.debug("로그아웃합니다.");
         CommonResponse<String> successResponse = new CommonResponse<>(CommonResponse.Meta.builder().code(200).message("ok").build(),
                 userService.logout(request));
         return ResponseEntity.ok(successResponse);
